@@ -39,4 +39,27 @@ class StoresController extends Controller
 
         return response()->json($stores);
     }
+
+
+    public function storesCanDeliverToPostcode(Request $request, $postcode): JsonResponse
+    {
+        // Find the postcode entry
+        $postcodeEntry = Postcode::where('postcode', $postcode)->first();
+
+        if (!$postcodeEntry) {
+            return response()->json(['message' => 'Postcode not found'], 404);
+        }
+
+        // Get latitude and longitude
+        $latitude = $postcodeEntry->latitude;
+        $longitude = $postcodeEntry->longitude;
+
+        // Default radius in kilometers
+        $distance = $request->input('distance', 10);
+
+        // Use the WithinDistance scope
+        $stores = Store::withinDeliveryDistance($latitude, $longitude, $distance)->paginate(10);
+
+        return response()->json($stores);
+    }
 }

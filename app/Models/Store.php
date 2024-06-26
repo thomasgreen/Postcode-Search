@@ -41,4 +41,20 @@ class Store extends Model
             ->having('distance', '<=', $distance)
             ->orderBy('distance');
     }
+
+
+    public function scopeWithinDeliveryDistance(Builder $query, float $latitude, float $longitude): Builder
+    {
+        $haversine = "(6371 * acos(cos(radians($latitude))
+                        * cos(radians(latitude))
+                        * cos(radians(longitude) - radians($longitude))
+                        + sin(radians($latitude))
+                        * sin(radians(latitude))))";
+
+        return $query->select('*')
+            ->selectRaw("{$haversine} AS distance")
+            ->groupBy('id', 'latitude', 'longitude', 'created_at', 'updated_at', 'name')
+            ->havingRaw('distance <= max_delivery_distance')
+            ->orderBy('distance');
+    }
 }

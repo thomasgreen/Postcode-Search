@@ -145,6 +145,8 @@ class ImportPostcodes extends Command
             'postcode' => $record['pcd'],
             'latitude' => $record['lat'],
             'longitude' => $record['long'],
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

@@ -22,7 +22,7 @@ class StoresController extends Controller
         // Find the postcode entry
         $postcodeEntry = Postcode::where('postcode', $postcode)->first();
 
-        if (!$postcodeEntry) {
+        if (! $postcodeEntry) {
             return response()->json(['message' => 'Postcode not found'], 404);
         }
 
@@ -40,13 +40,12 @@ class StoresController extends Controller
         return response()->json($stores);
     }
 
-
     public function storesCanDeliverToPostcode(Request $request, $postcode): JsonResponse
     {
         // Find the postcode entry
         $postcodeEntry = Postcode::where('postcode', $postcode)->first();
 
-        if (!$postcodeEntry) {
+        if (! $postcodeEntry) {
             return response()->json(['message' => 'Postcode not found'], 404);
         }
 

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\StoresController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -10,5 +9,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/stores/near/{postcode}', [StoresController::class, 'storesNearPostcode']);
     Route::get('/stores/can-deliver/{postcode}', [StoresController::class, 'storesCanDeliverToPostcode']);
 });
-
-

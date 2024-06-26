@@ -30,19 +30,19 @@ class ImportPostcodesTest extends TestCase
         $csvContent = "pcd,lat,long\nAB10 1XG,57.144165,-2.114848\nAB10 6RN,57.137879,-2.121487\n";
 
         // Create a temporary CSV file
-        $csvFilePath = tempnam(sys_get_temp_dir(), 'ONSPD_NOV_2022_UK') . '.csv';
+        $csvFilePath = tempnam(sys_get_temp_dir(), 'ONSPD_NOV_2022_UK').'.csv';
         file_put_contents($csvFilePath, $csvContent);
 
         // Create a temporary ZIP file containing the CSV file
         $zip = new ZipArchive();
-        $zipFilePath = tempnam(sys_get_temp_dir(), '2022-11') . '.zip';
+        $zipFilePath = tempnam(sys_get_temp_dir(), '2022-11').'.zip';
         $zip->open($zipFilePath, ZipArchive::CREATE);
         $zip->addFile($csvFilePath, 'Data/ONSPD_NOV_2022_UK.csv');
         $zip->close();
 
         // Mock the HTTP response to return the ZIP file content
         Http::fake([
-            'https://parlvid.mysociety.org/os/ONSPD/2022-11.zip' => Http::response(file_get_contents($zipFilePath))
+            'https://parlvid.mysociety.org/os/ONSPD/2022-11.zip' => Http::response(file_get_contents($zipFilePath)),
         ]);
 
         // Clean up temporary files

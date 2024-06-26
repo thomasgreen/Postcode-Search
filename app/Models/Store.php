@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Enums\StoreType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @method static selectRaw(string $string, array $array)
@@ -24,7 +24,7 @@ class Store extends Model
         'longitude',
         'is_open',
         'store_type',
-        'max_delivery_distance'
+        'max_delivery_distance',
     ];
 
     public function scopeWithinDistance(Builder $query, float $latitude, float $longitude, int $distance = 5): Builder
@@ -41,7 +41,6 @@ class Store extends Model
             ->having('distance', '<=', $distance)
             ->orderBy('distance');
     }
-
 
     public function scopeWithinDeliveryDistance(Builder $query, float $latitude, float $longitude): Builder
     {

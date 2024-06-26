@@ -30,8 +30,9 @@ class IssueToken extends Command
 
         $user = User::find($userId);
 
-        if (!$user) {
+        if (! $user) {
             $this->error('User not found.');
+
             return 1;
         }
 
@@ -39,7 +40,7 @@ class IssueToken extends Command
         $token = $user->createToken('Console Token')->plainTextToken;
 
         // Output the token
-        $this->info('Token: ' . $token);
+        $this->info('Token: '.$token);
 
         return 0;
     }

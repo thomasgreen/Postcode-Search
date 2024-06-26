@@ -6,7 +6,6 @@ use App\Models\Postcode;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -21,7 +20,7 @@ class StoreNearPostcodeTest extends TestCase
         Sanctum::actingAs(User::factory()->create());
     }
 
-    public function test_stores_near_postcode()
+    public function test_stores_near_postcode(): void
     {
         // Create a postcode
         Postcode::create([
@@ -58,7 +57,7 @@ class StoreNearPostcodeTest extends TestCase
         $response->assertJsonCount(1, 'data');
     }
 
-    public function test_postcode_not_found()
+    public function test_postcode_not_found(): void
     {
         // Make the request with a non-existent postcode
         $response = $this->getJson('/api/stores/near/NE12PA');

@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "2f9aa88e-fe17-4eb5-9eed-a22133fd8233",
+		"name": "Tech Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28796237"
+	},
+	"item": [
+		{
+			"name": "Add Store",
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "latitude",
+							"value": "54.545682",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "-1.213732",
+							"type": "text"
+						},
+						{
+							"key": "is_open",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "store_type",
+							"value": "shop",
+							"type": "text"
+						},
+						{
+							"key": "max_delivery_distance",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "0.0.0.0/api/stores",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Store Near Postcode",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"followRedirects": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "latitude",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "-2",
+							"type": "text"
+						},
+						{
+							"key": "is_open",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "store_type",
+							"value": "shop",
+							"type": "text"
+						},
+						{
+							"key": "max_delivery_distance",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "0.0.0.0/api/stores/near/ts4 3ts?distance=20",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"stores",
+						"near",
+						"ts4 3ts"
+					],
+					"query": [
+						{
+							"key": "distance",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find delivering stores",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"followRedirects": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "latitude",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "-2",
+							"type": "text"
+						},
+						{
+							"key": "is_open",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "store_type",
+							"value": "shop",
+							"type": "text"
+						},
+						{
+							"key": "max_delivery_distance",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "0.0.0.0/api/stores/can-deliver/ts4 3ts",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"path": [
+						"api",
+						"stores",
+						"can-deliver",
+						"ts4 3ts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

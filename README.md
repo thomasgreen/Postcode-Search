@@ -21,7 +21,23 @@ To import the postcodes, run
 ./vendor/bin/sail artisan app:import-postcodes
 ```
 
+## Functionality
+
+This application uses the Haversine formula to calculate the distance between the user postcode and stores.
+
+### Future Work
+
+If i had more time on this application, I would add more refinement options to the search endpoints (filter by store type, search by name etc).
+
+I would add full user related endpoints to create tokens, revoke tokens etc.
+
+I would add some kind of dashboard to visualise stores in the system on a map.
+
 ## API Endpoints
+
+Note: I have added a artisan command `app:issue-token {id} `which can be used to generate a token for the authentication header in postman,
+
+A postman collection is in the base of this repo to save you setting up the endpoints manually.
 
 ### POST /stores
 

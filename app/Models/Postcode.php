@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Postcode extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'postcode',
+        'latitude',
+        'longitude',
+    ];
 }

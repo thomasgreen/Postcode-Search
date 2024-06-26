@@ -8,11 +8,19 @@ This application uses laravel and sail. To install, run the following commands a
 cd postcode-search
 ./vendor/bin/sail up
 ./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
 ```
+
 
 The app should be accessible on at `localhost`.
 
 ## Import Postcodes
+
+To import the postcodes, run 
+
+```bash
+./vendor/bin/sail artisan app:import-postcodes
+```
 
 ## API Endpoints
 
@@ -33,3 +41,171 @@ Create a new store.
 
 - `201 Created`: On success, returns the created store object.
 - `422 Unprocessable Entity`: On validation failure, returns validation errors.
+
+### GET /stores/can-deliver/{postcode}
+
+Fetch stores that can deliver to a given postcode based on the store's `max_delivery_distance`.
+
+#### Parameters
+
+- `postcode` (string, required): The postcode to search near.
+- `distance` (integer, optional): The radius (in km) to search within. If not specified, defaults to the store's `max_delivery_distance`.
+
+#### Response
+
+- `200 OK`: On success, returns a paginated list of stores that can deliver to the given postcode.
+- `404 Not Found`: If the postcode is not found.
+
+#### Example Response
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 3,
+            "name": "test",
+            "latitude": "54.5456820",
+            "longitude": "-1.2137320",
+            "is_open": 1,
+            "store_type": "shop",
+            "max_delivery_distance": 10,
+            "created_at": "2024-06-26T18:27:39.000000Z",
+            "updated_at": "2024-06-26T18:27:39.000000Z",
+            "distance": 0
+        }
+    ],
+    "first_page_url": "http://0.0.0.0/api/stores/near/ts4%203ts?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http://0.0.0.0/api/stores/near/ts4%203ts?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "http://0.0.0.0/api/stores/near/ts4%203ts?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "http://0.0.0.0/api/stores/near/ts4%203ts",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
+
+#### Note
+
+- The `distance` field in the response indicates the distance from the store to the provided postcode in kilometers.
+- Ensure that the `Authorization` header is set with a valid Bearer token when making the request.
+
+### Authorization
+
+This endpoint is protected by the `auth:sanctum` middleware. Ensure you include a valid authentication token in the request headers.
+
+#### Error Responses
+
+- **404 Not Found**: Returned if the specified postcode is not found in the database.
+
+```json
+{
+    "message": "Postcode not found"
+}
+```
+
+Certainly! Here's the API documentation for the endpoint that returns stores near a given postcode.
+
+## API Documentation
+
+### GET /stores/near/{postcode}
+
+Fetch stores near a given postcode within a specified distance.
+
+#### Parameters
+
+- `postcode` (string, required): The postcode to search near.
+- `distance` (integer, optional): The radius (in km) to search within. Default is 10 km.
+
+#### Response
+
+- `200 OK`: On success, returns a paginated list of stores near the given postcode.
+- `404 Not Found`: If the postcode is not found.
+
+#### Example Response
+
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 3,
+            "name": "test",
+            "latitude": "54.5456820",
+            "longitude": "-1.2137320",
+            "is_open": 1,
+            "store_type": "shop",
+            "max_delivery_distance": 10,
+            "created_at": "2024-06-26T18:27:39.000000Z",
+            "updated_at": "2024-06-26T18:27:39.000000Z",
+            "distance": 0
+        }
+    ],
+    "first_page_url": "http://0.0.0.0/api/stores/near/ts4%203ts?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http://0.0.0.0/api/stores/near/ts4%203ts?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "http://0.0.0.0/api/stores/near/ts4%203ts?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "http://0.0.0.0/api/stores/near/ts4%203ts",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+```
+
+#### Note
+
+- The `distance` field in the response indicates the distance from the store to the provided postcode in kilometers.
+- Ensure that the `Authorization` header is set with a valid Bearer token when making the request.
+
+### Authorization
+
+This endpoint is protected by the `auth:sanctum` middleware. Ensure you include a valid authentication token in the request headers.
+
+#### Error Responses
+
+- **404 Not Found**: Returned if the specified postcode is not found in the database.
+
+```json
+{
+    "message": "Postcode not found"
+}
+```

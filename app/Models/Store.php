@@ -35,7 +35,7 @@ class Store extends Model
             ->groupBy('id', 'latitude', 'longitude', 'created_at', 'updated_at', 'name');
     }
 
-    public function scopeWithinDistance(Builder $query, float $latitude, float $longitude, int $distance = 5): Builder
+    public function scopeWithinDistance(Builder $query, float $latitude, float $longitude, int $distance = 10): Builder
     {
         return $this->scopeHaversine($query, $latitude, $longitude)
             ->having('distance', '<=', $distance)

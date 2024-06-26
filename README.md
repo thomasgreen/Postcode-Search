@@ -129,16 +129,6 @@ Fetch stores that can deliver to a given postcode based on the store's `max_deli
 
 This endpoint is protected by the `auth:sanctum` middleware. Ensure you include a valid authentication token in the request headers.
 
-#### Error Responses
-
-- **404 Not Found**: Returned if the specified postcode is not found in the database.
-
-```json
-{
-    "message": "Postcode not found"
-}
-```
-
 ### GET /stores/near/{postcode}
 
 Fetch stores near a given postcode within a specified distance.
@@ -210,13 +200,3 @@ Fetch stores near a given postcode within a specified distance.
 ### Authorization
 
 This endpoint is protected by the `auth:sanctum` middleware. Ensure you include a valid authentication token in the request headers.
-
-#### Error Responses
-
-- **404 Not Found**: Returned if the specified postcode is not found in the database.
-
-```json
-{
-    "message": "Postcode not found"
-}
-```

@@ -11,7 +11,6 @@ cd postcode-search
 ./vendor/bin/sail artisan db:seed
 ```
 
-
 The app should be accessible on at `localhost`.
 
 ## Import Postcodes
@@ -123,10 +122,6 @@ This endpoint is protected by the `auth:sanctum` middleware. Ensure you include 
     "message": "Postcode not found"
 }
 ```
-
-Certainly! Here's the API documentation for the endpoint that returns stores near a given postcode.
-
-## API Documentation
 
 ### GET /stores/near/{postcode}
 

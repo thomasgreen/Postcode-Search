@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\StoreType;
 use App\Models\Postcode;
 use App\Models\Store;
 use App\Models\User;
@@ -35,7 +36,7 @@ class StoreNearPostcodeTest extends TestCase
             'latitude' => 45.123000,
             'longitude' => -93.123000,
             'is_open' => true,
-            'store_type' => \App\Enums\StoreType::Shop,
+            'store_type' => StoreType::Shop,
             'max_delivery_distance' => 10,
         ]);
 
@@ -44,7 +45,7 @@ class StoreNearPostcodeTest extends TestCase
             'latitude' => 45.130000,
             'longitude' => -91.130000,
             'is_open' => true,
-            'store_type' => \App\Enums\StoreType::Shop,
+            'store_type' => StoreType::Shop,
             'max_delivery_distance' => 10,
         ]);
 
@@ -59,11 +60,6 @@ class StoreNearPostcodeTest extends TestCase
 
     public function test_postcode_not_found(): void
     {
-        // Make the request with a non-existent postcode
-        $response = $this->getJson('/api/stores/near/NE12PA');
-
-        // Assert the response
-        $response->assertStatus(404);
-        $response->assertJson(['message' => 'Postcode not found']);
+        $this->getJson('/api/stores/near/NE12PA')->assertStatus(404);
     }
 }

@@ -14,4 +14,6 @@ class Postcode extends Model
         'latitude',
         'longitude',
     ];
+
+    protected $primaryKey = 'postcode';
 }

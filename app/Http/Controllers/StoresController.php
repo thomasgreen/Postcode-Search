@@ -17,18 +17,11 @@ class StoresController extends Controller
         return response()->json(['store' => $store], 201);
     }
 
-    public function storesNearPostcode(Request $request, string $postcode): JsonResponse
+    public function storesNearPostcode(Request $request, Postcode $postcode): JsonResponse
     {
-        // Find the postcode entry
-        $postcodeEntry = Postcode::where('postcode', $postcode)->first();
-
-        if (! $postcodeEntry) {
-            return response()->json(['message' => 'Postcode not found'], 404);
-        }
-
         // Get latitude and longitude
-        $latitude = $postcodeEntry->latitude;
-        $longitude = $postcodeEntry->longitude;
+        $latitude = $postcode->latitude;
+        $longitude = $postcode->longitude;
 
         // Default radius in kilometers
         $distance = $request->input('distance', 10);
@@ -40,18 +33,11 @@ class StoresController extends Controller
         return response()->json($stores);
     }
 
-    public function storesCanDeliverToPostcode(string $postcode): JsonResponse
+    public function storesCanDeliverToPostcode(Postcode $postcode): JsonResponse
     {
-        // Find the postcode entry
-        $postcodeEntry = Postcode::where('postcode', $postcode)->first();
-
-        if (! $postcodeEntry) {
-            return response()->json(['message' => 'Postcode not found'], 404);
-        }
-
         // Get latitude and longitude
-        $latitude = $postcodeEntry->latitude;
-        $longitude = $postcodeEntry->longitude;
+        $latitude = $postcode->latitude;
+        $longitude = $postcode->longitude;
 
         // Use the WithinDistance scope
         $stores = Store::withinDeliveryDistance($latitude, $longitude)->paginate(10);

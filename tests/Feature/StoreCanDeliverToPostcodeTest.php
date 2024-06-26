@@ -25,15 +25,15 @@ class StoreCanDeliverToPostcodeTest extends TestCase
         // Create a postcode
         Postcode::create([
             'postcode' => 'TS4 3TS',
-            'latitude' => 45.123456,
-            'longitude' => -93.123456,
+            'latitude' => 54.544105317071825,
+            'longitude' => -1.210862175846583,
         ]);
 
         // Create stores
         Store::create([
             'name' => 'Test Store 1',
-            'latitude' => 45.123000,
-            'longitude' => -93.123000,
+            'latitude' => 54.521172849463404,
+            'longitude' => -1.2535098572881425,
             'is_open' => true,
             'store_type' => \App\Enums\StoreType::Shop,
             'max_delivery_distance' => 1, // This store can deliver within 1 km
@@ -41,8 +41,8 @@ class StoreCanDeliverToPostcodeTest extends TestCase
 
         Store::create([
             'name' => 'Test Store 2',
-            'latitude' => 45.130000,
-            'longitude' => -93.130000,
+            'latitude' => 54.5689045407684,
+            'longitude' => -1.2230607639330415,
             'is_open' => true,
             'store_type' => \App\Enums\StoreType::Shop,
             'max_delivery_distance' => 10, // This store can deliver within 10 km
